@@ -1,0 +1,238 @@
+* {
+    margin: 0px;
+    padding: 0px;
+}
+
+.header {
+    color: #36A0FF;
+    font-size: 27px;
+    padding: 10px;
+}
+
+.bigicon {
+    font-size: 35px;
+    color: #36A0FF;
+}
+
+/* esta parte pertenece al footer */
+footer {
+    background-image: linear-gradient(to top, #292727, grey, white);
+    display: grid;
+    justify-items: center;
+    margin: 0;
+}
+
+.datosContacto {
+    display: flex;
+    flex-direction: column;
+    font-family: "alfa slab one";
+    color: rgba(6, 17, 46, 0.979);
+    font-size: 20px;
+    text-align: center;
+    margin: 20px;
+}
+
+.datosContacto p {
+    margin-bottom: 0;
+}
+
+.datosContacto a {
+    text-decoration: none;
+    color: rgba(6, 17, 46, 0.979);
+    margin-bottom: 0;
+}
+
+h5 {
+    color: antiquewhite;
+    margin: 0;
+    font-size: 15px;
+}
+
+.social {
+    display: flex;
+    flex-direction: row;
+    font-size: 40px;
+    justify-content: center;
+}
+
+.social__facebook {
+    color: #3b5998;
+}
+
+.social__instagram {
+    color: rgba(177, 15, 109, 0.91);
+    margin-left: 100px;
+    margin-right: 100px;
+}
+
+.social__whatsapp {
+    color: #00bb2d;
+}
+
+@media (max-width: 576px) {
+    footer {
+        justify-items: center;
+    }
+
+    .datosContacto {
+        font-size: 15px;
+        text-align: center;
+        margin: 5px;
+    }
+
+    h5 {
+        color: antiquewhite;
+        margin: 0;
+        font-size: 10px;
+    }
+
+    .social {
+        width: 350px;
+    }
+}
+
+@media only screen and (min-width: 577px) and (max-width: 968px) {
+    footer {
+        justify-items: center;
+    }
+
+    .datosContacto {
+        font-size: 10px;
+        text-align: center;
+        margin: 5px;
+    }
+
+    h5 {
+        color: antiquewhite;
+        margin: 0;
+        font-size: 10px;
+    }
+
+    .social {
+        width: 420px;
+    }
+}
+
+/* esta parte pertenece al header */
+header {
+    display: grid;
+    grid-template-columns: 1.75fr 0.75fr;
+    grid-template-rows: 0.85fr;
+    grid-template-areas: "men logo";
+    height: 25vh;
+}
+
+header ul,
+header li {
+    display: flex;
+    flex-direction: row;
+    font-family: "alfa slab one";
+    font-size: 20px;
+    padding-left: 0;
+    margin-bottom: 0;
+}
+
+.logo img {
+    width: 60%;
+    margin-bottom: 0px;
+    margin-top: -30px;
+    padding: 0;
+}
+
+.logo {
+    width: 100%;
+    margin-left: 0px;
+    position: relative;
+    box-sizing: border-box;
+    grid-area: logo;
+}
+
+.navMenu {
+    display: flex;
+    width: 100%;
+    height: fit-content;
+    padding: auto;
+    margin-right: 0;
+    grid-area: men;
+    line-height: 1;
+}
+
+.navMenu ul li a {
+    background-color: rgba(228, 207, 19, 0.71);
+    color: rgba(6, 17, 46, 0.979);
+    text-decoration: none;
+    padding: 5px;
+    margin: 0px;
+}
+
+.navMenu ul li a:hover {
+    background-color: #434343;
+    color: rgba(228, 207, 19, 0.71);
+}
+
+.headerSinFoto {
+    background-image: linear-gradient(to bottom, black, #555252, white);
+}
+
+.headerConFoto {
+    background-image: url(../images/header.jpg);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    width: 98vw;
+    height: 100%;
+    opacity: 0.9;
+}
+
+.headerContacto {
+    background-image: url(../images/image-contact-us2.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    height: auto;
+}
+
+@media (max-width: 576px) {
+    header {
+        display: grid;
+        grid-template-columns: 50vw 50vw;
+        grid-template-rows: 1fr;
+        grid-template-areas: "men logo";
+        height: 25vh;
+    }
+
+    header ul,
+    header li {
+        display: flex;
+        flex-direction: column;
+        font-family: "alfa slab one";
+        font-size: 15px;
+    }
+
+    header .logo img {
+        width: 60%;
+        padding: 0;
+    }
+
+    .logo {
+        align-self: center;
+        text-align: right;
+        padding-right: 45px;
+    }
+}
+
+@media only screen and (min-width: 577px) and (max-width: 968px) {
+
+    header ul,
+    header li {
+        font-size: 10px;
+    }
+}
+
+#boton {
+    margin-top: 15px;
+}
+
+#botonDolar {
+    margin-top: 40px;
+}

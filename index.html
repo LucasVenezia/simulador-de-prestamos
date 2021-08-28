@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description"
+        content="Autos usados seleccionados en venta. Todas las marcas. Planes de financiación. Vehículos con revisiones para garantía del cliente.">
+    <meta name="keywords"
+        content="CONCESIONARIA DE AUTOMOVILES, AUTOS USADOS, FINANCIACION DE AUTOS, AUTOMÓVILES NUEVOS, AGENCIAS BERAZATEGUI">
+    <title>Simulador de Prestamo</title>
+    <link rel="shortcut icon" href="./images/favicon2.png">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">
+    <link rel="stylesheet" href="./css/normalize.css">
+    <link href="https://fonts.googleapis.com/css2?family=Alfa+Slab+One&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./css/stylos.css">
+</head>
+<body>
+    <header>
+        <header class="headerConFoto">
+            <!--insertado de imagen Logo-->
+            <div class="logo">
+                <a href="index.html"><img src="./images/logo.png" alt="logo" title="ir a inicio"></a>
+            </div>
+            <nav class="navMenu">
+                <ul>
+                    <!--creacion de lista de menu con link a dif. paginas-->
+                    <li><a href="#"><i class="fas fa-home"></i></a></li>
+                    <li><a href="#">Buscá tu Auto</a></li>
+                    <li><a href="#">Vender</a></li>
+                    <li><a href="index.html">Financialo</a></li>
+                    <li><a href="#">Empresa</a></li>
+                    <li><a href="#">Contactanos</a></li>
+                </ul>
+            </nav>
+        </header>
+    </header>
+
+    <section id="simulador">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="well well-sm">
+                        <form id= "formulario" name= "datos" class="form-horizontal" method="post">
+                            <fieldset>
+                                <h2 id="tituloCaluladora" class="h2" class="text-center header">Calcula tu Prestamo</h2>
+                                <div class="form-group">
+                                    <span class="col-md-1 col-md-offset-2 text-center"><i class="fa fa-user bigicon"></i></span>
+                                    <div class="col-md-10">
+                                        <input  id="nombre" name="name" type="text" placeholder="Nombre" class="form-control">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <span class="col-md-1 col-md-offset-2 text-center"><i class="fa fa-user bigicon"></i></span>
+                                    <div class="col-md-10">
+                                        <input  id="age" name="age" type="number" placeholder="Edad" class="form-control">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <span class="col-md-1 col-md-offset-2 text-center"><i class="fa fa-envelope-o bigicon"></i></span>
+                                    <div class="col-md-10">
+                                        <input  id="email" name="email" type="text" placeholder="Email" class="form-control">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <span class="col-md-1 col-md-offset-2 text-center"><i class="fa fa-phone-square bigicon"></i></span>
+                                    <div class="col-md-10">
+                                        <input  id="phone" name="phone" type="number" placeholder="Teléfono" class="form-control">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="customRange3" class="form-label">Monto a solicitar</label>
+                                    <div class="col-md-10">
+                                        <input  type="range" id="monto" name="vol" class="form-range" min="0" max="1000000"
+                                            step="5000" value="0" id="customRange3" onchange="document.getElementById('outvol').value=value" list="tickmarks">
+                                        <output  class="form__output" id="outvol" name="outvol" for="vol">0</output>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-md-10">
+                                        <select  id="cuotas" class="form-select" aria-label="Default select example">
+                                            <option selected>Selecciona el Plazo</option>
+                                            <option value="12">12 meses</option>
+                                            <option value="18">18 meses</option>
+                                            <option value="24">24 meses</option>
+                                            <option value="36">36 meses</option>
+                                            <option value="48">48 meses</option>
+                                            <option value="60">60 meses</option>
+                                            <option value="72">72 meses</option>
+                                            <option value="84">84 meses</option>    
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <span class="col-md-1 col-md-offset-2 text-center"><i class="fa fa-user bigicon"></i></span>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-md-10 text-center">
+                                        <button  id="boton" type="button" class="btn btn-primary btn-lg">Calcular</button>
+                                    </div>
+                                </div>
+                            </fieldset>
+                        </form>
+                        <button id="botonDolar" type="button" class="btn btn-primary btn-lg">Cotizacion u$s</button>
+                        <div id="apiList"></div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div id="tarjeta" class="card">
+
+                    </div>
+                    <div id="table1">
+                        <table id="list-table" class="table">
+                            <thead>
+                                <tr>
+                                    <th>Fecha</th>
+                                    <th>Cuota</th>
+                                    <th>Capital</th>
+                                    <th>Interés</th>
+                                    <th>Saldo</th>
+                                </tr>
+                            </thead>
+                            <tbody></tbody>
+                        </table>
+
+                    </div>
+
+                
+                </div>
+            </div>
+        </div>
+    </section>
+    <footer>
+        <section>
+            <!--redes-->
+            <div class="social">
+                <div>
+                    <a class="social__facebook" href="https://www.facebook.com/Tresa-Autos-105541328375405"><i
+                            class="fab fa-facebook-square"></i></a>
+                </div>
+                <div>
+                    <a class="social__instagram" href="https://instagram.com/tresaautos?igshid=1m8cc0nm75hl3"><i
+                            class="fab fa-instagram-square"></i><a>
+                </div>
+                <div>
+                    <a class="social__whatsapp"
+                        href="https://api.whatsapp.com/send?phone=541140581259&fbclid=IwAR3JZJ3cFh8czDIbMM33RY45DklIXNkqDQq8XjwjM5uduz6tZWO6dVB0qxs"><i
+                            class="fab fa-whatsapp-square"></i></a>
+                </div>
+            </div>
+        </section>
+        <div class="datosContacto">
+            <!--informacion de contacto-->
+            <p> Avenida Mitre 866, B1880EEV Berazategui, Provincia de Buenos Aires</p>
+            <a href="tel:+54 11 4058-1259">
+                <p>(011) 15-4058-1259</p>
+            </a>
+            <a href="mailto:info@tresaautos.com.ar">
+                <p>info@tresaautos.com.ar</p>
+            </a>
+        </div>
+        <h5>© Copyright Tresa Automotores 2021 - Todos los derechos reservados</h5>
+    </footer>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous">
+    </script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="./js/moment.js"></script>
+    <script src="./js/simulador.js" type="text/javascript"></script>
+    
+</body>
+</html>
