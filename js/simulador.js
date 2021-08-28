@@ -34,11 +34,76 @@ function click(e) {
     const cuotas = $('#cuotas').val();
     const interes = calculoInteres(cuotas);
 
+    if (validarForm()){
+    
     calcularCuota(monto, cuotas, interes);
     
     mostrarCard(nombre, age, email, phone);
-
+    }
     
+}
+
+function validarForm(){
+    
+    if($("#nombre").val() == ""){
+        Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: 'El campo nombre no puede estar vacío!',
+            });
+        $("#nombre").focus();       
+        return false;
+    }
+    if($("#age").val() == ""){
+        Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: 'El campo edad no puede estar vacío!',
+            });
+        $("#age").focus();
+        return false;
+    }
+    if($("#email").val() == ""){
+        Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: 'El campo email no puede estar vacío!',
+            });
+        $("#email").focus();
+        return false;
+    }
+
+    if($("#phone").val() == ""){
+        Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: 'El campo teléfono no puede estar vacío!',
+            });
+            $("#phone").focus();
+        return false;
+    }
+
+    if($("#monto").val() == "0"){
+        Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: 'Debe elegir un monto!',
+            });
+            $("#monto").focus();
+        return false;
+    }
+
+    if($("#cuotas").val() == ""){
+        Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: 'Debe elegir cantidad de cuotas',
+            });
+            $("#cuotas").focus();
+        return false;
+    }
+
+    return true;
 }
 
 function calculoInteres(cuotas) { 
@@ -110,7 +175,6 @@ function mostrarCard(nombre, age, email, phone) {
 
 }
 
-
 function calcularCuota(monto, cuotas, interes) {
 
     while(tabla.firstChild){
@@ -146,6 +210,9 @@ function calcularCuota(monto, cuotas, interes) {
     }
 
 }
+
+
+
 
 boton.click(animar);
 boton.click(animar2);
