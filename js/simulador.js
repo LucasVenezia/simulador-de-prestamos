@@ -245,10 +245,15 @@ $("#botonDolar").on("click", cotizar);
 
 function cotizar() {
     
-    let url = 'https://api-dolar-argentina.herokuapp.com/api/dolaroficial';
+    let url = 'https://www.dolarsi.com/api/api.php?type=valoresprincipales';
 
     $.get(url, function (response, status) {
+        const apiArray = response[0];
+        const datos = Object.values(apiArray)
+        
         if(status === "success") {
+        for (const dato of datos){
+
             $('#apiList').append(`<table class=table>
                                         <thead>
                                             <tr>
@@ -258,15 +263,14 @@ function cotizar() {
                                         </thead>
                                         <tbody>
                                             <tr>
-                                                <th>${response.compra}</th>
-                                                <th>${response.venta}</th>
+                                                <th>${dato.compra}</th>
+                                                <th>${dato.venta}</th>
                                             </tr>
                                         </tbody>
-                                    </table>
-                                        <p>Fecha: ${response.fecha.substr(0,10)} (GMT +0)</p>`)
-                        .css("width", "35%");
+                                    </table>`)
+                        .css("width", "35%"); 
 
-        }
+        }}
     })
 
 }
