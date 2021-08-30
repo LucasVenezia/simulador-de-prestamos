@@ -20,6 +20,11 @@ function addElement() {
 const boton = $('#boton');
 const tarjeta = $('#tarjeta').val();
 const tabla = document.querySelector('#list-table tbody');
+const tarjeta2 = document.querySelector('#tarjeta');
+const tablaDolar = document.querySelector('#apiList');
+const notice = document.querySelector('#nota');
+const cardDolar = document.querySelector('#cardDolar');
+const form = $('#formulario');
 
 boton.click(click);
 
@@ -33,12 +38,20 @@ function click(e) {
     const monto = $('#monto').val();
     const cuotas = $('#cuotas').val();
     const interes = calculoInteres(cuotas);
+    
 
     if (validarForm()){
     
-    calcularCuota(monto, cuotas, interes);
     
+    calcularCuota(monto, cuotas, interes);
+
     mostrarCard(nombre, age, email, phone);
+
+    animar ();
+
+    notaFin ();
+
+    $("#formulario").trigger("reset");
     }
     
 }
@@ -151,8 +164,8 @@ function calculoInteres(cuotas) {
 
 function mostrarCard(nombre, age, email, phone) {
 
-    while(tarjeta.firstChild){
-        tarjeta.removeChild(tarjeta.firstChild);
+    while(tarjeta2.firstChild){
+        tarjeta2.removeChild(tarjeta2.firstChild);
     }
 
     const enJson = JSON.stringify(nombre);
@@ -190,6 +203,9 @@ function calcularCuota(monto, cuotas, interes) {
 
     cuota = monto * (Math.pow(1 + interes / 100, cuotas) * interes / 100) / (Math.pow(1 + interes / 100, cuotas) - 1);
 
+    const enJason4 = JSON.stringify(cuota);
+    localStorage.setItem('cuota', enJason4);
+
     for(let i = 1; i <= cuotas; i++) {
 
         pagoInteres = parseFloat(monto*(interes/100));
@@ -214,7 +230,7 @@ function calcularCuota(monto, cuotas, interes) {
 
 
 
-boton.click(animar);
+//boton.click(animar);
 boton.click(animar2);
 
 function animar(){
@@ -235,16 +251,27 @@ $('h1').animate({
 }, 1500)
 }
 
-$(boton).click(() => {
-    $("#formulario").append(`<h2 id="notice">Calculo Plan de Pago Mensual Finalizado</h2>`);
-    $("#notice").slideUp(5000);
-})
+function notaFin () {
+    while(notice.firstChild){
+        notice.removeChild(notice.firstChild);
+    }
+
+    $("#nota").append(`<h2 id="notice">Calculo Plan de Pago Mensual Finalizado</h2>`);
+    $("#notice").slideUp(9000);
+}
 
 
-$("#botonDolar").on("click", cotizar);
+$("#botonDolar").click(() => {
+    cotizar();
+    cuotaDolar();
+});
 
 function cotizar() {
-    
+
+    while(tablaDolar.firstChild){
+        tablaDolar.removeChild(tablaDolar.firstChild);
+    }
+
     let url = 'https://www.dolarsi.com/api/api.php?type=valoresprincipales';
 
     $.get(url, function (response, status) {
@@ -254,7 +281,7 @@ function cotizar() {
         if(status === "success") {
         for (const dato of datos){
 
-            $('#apiList').append(`<table class=table>
+            $('#apiList').append(`<table id= tablaDolar class=table>
                                         <thead>
                                             <tr>
                                                 <th>Compra</th>
@@ -269,8 +296,39 @@ function cotizar() {
                                         </tbody>
                                     </table>`)
                         .css("width", "35%"); 
+                        
+            const enJson5 = JSON.stringify(datos);
+            localStorage.setItem('dolar', enJson5);
 
         }}
     })
 
 }
+
+function cuotaDolar (cuotaEnDolares) {
+    
+    while(cardDolar.firstChild){
+        cardDolar.removeChild(cardDolar.firstChild);
+    }
+
+    const cuotaPesos = localStorage.getItem('cuota');
+    const datoDolar = localStorage.getItem('dolar');
+    const dolar = JSON.parse(datoDolar);
+    const dolarVenta = dolar[0];
+    
+
+    cuotaEnDolares = parseFloat(cuotaPesos) / parseFloat(dolarVenta.venta)
+    console.log(cuotaEnDolares)
+
+
+    $('#cardDolar').append(`<div class="card" style="width: 18rem; margin: 10px">
+                        <div class="card-body" >
+                            <h5 class="card-title" style="color: black; fontweight: bold">CUOTA EN DOLARES</h5>
+                            <h6 class="card-subtitle mb-2 text-muted">El valor de la cuota es: u$s${cuotaEnDolares.toFixed(2)}</h6>
+                            </div>
+                        </div>`)
+}
+
+
+
+
