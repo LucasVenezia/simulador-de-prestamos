@@ -52,7 +52,23 @@ function click(e) {
     notaFin ();
 
     $("#formulario").trigger("reset");
+
+    const URLPOST = 'https://jsonplaceholder.typicode.com/posts';
+    
+    const user = { email: email, id: 1, phone: phone, name: nombre, age: age, monto: monto, cuotas: cuotas};
+
+    $.post(URLPOST, user, (response, status) => {
+        if(status === 'success') {
+            Swal.fire(
+                'Buen trabajo',
+                'Sus datos fueron guardados con exito!',
+                )
+        }
+      });
+
+
     }
+
     
 }
 
@@ -257,11 +273,12 @@ function notaFin () {
     }
 
     $("#nota").append(`<h2 id="notice">Calculo Plan de Pago Mensual Finalizado</h2>`);
-    $("#notice").slideUp(9000);
+    $("#notice").slideUp(3000);
 }
 
 
-$("#botonDolar").click(() => {
+$("#botonDolar").click((e) => {
+    e.preventDefault()
     cotizar();
     cuotaDolar();
 });
@@ -318,9 +335,7 @@ function cuotaDolar (cuotaEnDolares) {
     
 
     cuotaEnDolares = parseFloat(cuotaPesos) / parseFloat(dolarVenta.venta)
-    console.log(cuotaEnDolares)
-
-
+    
     $('#cardDolar').append(`<div class="card" style="width: 18rem; margin: 10px">
                         <div class="card-body" >
                             <h5 class="card-title" style="color: black; fontweight: bold">CUOTA EN DOLARES</h5>
